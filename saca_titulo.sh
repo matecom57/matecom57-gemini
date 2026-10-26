@@ -1,0 +1,27 @@
+#!/bin/bash
+
+file=$1
+
+h1=`pdftotext $1 - | sed '3q;d'`
+h2=`pdftotext $1 - | sed '4q;d'`
+
+echo $h1
+echo $h2
+
+h3=${h2:0:4}
+
+h1="${h1// /_}"
+h2="${h2// /_}"
+
+if [ "$h3" = "http" ]; then
+   h2=""
+fi
+
+nombre=$h1"_"$h2.pdf
+
+echo $nombre
+
+mv $1 $nombre
+
+
+
